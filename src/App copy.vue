@@ -29,7 +29,17 @@ const init = () => {
 };
 
 const reactiveData = reactive({
-  attendanceTypes: ["残業", "深夜", "休出", "年休", "欠勤", "公休", "休業"],
+  // attendanceTypes: ["残業", "深夜", "休出", "年休", "欠勤", "公休", "休業"],
+  attendanceTypes: {
+    overTime: "残業",
+    lateNightOverTime: "深夜",
+    holidayWorkTime: "休出",
+    annualVacation: "年休",
+    absenteeism: "欠勤",
+    publicHolidayTime: "公休",
+    companyClosureTime: "休業",
+  },
+
   calendars: {},
   cumulativeTotal: {
     overTime: 0.0,
@@ -93,14 +103,41 @@ const calcCumulativeTotal = () => {
       </thead>
 
       <tbody class="w-full h-full">
-        <tr
-          class="flex flex-col items-center w-full"
-          v-for="(type, _) in reactiveData.attendanceTypes"
-        >
+        <tr class="flex flex-col items-center w-full">
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type }}
+            {{ reactiveData.attendanceTypes.overTime }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.lateNightOverTime }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.holidayWorkTime }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.annualVacation }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.absenteeism }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.publicHolidayTime }}
+          </td>
+          <td
+            class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
+          >
+            {{ reactiveData.attendanceTypes.companyClosureTime }}
           </td>
         </tr>
       </tbody>
