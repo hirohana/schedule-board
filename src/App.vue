@@ -29,17 +29,17 @@ const init = () => {
 };
 
 const reactiveData = reactive({
-  attendanceTypes: [
-    {
-      overTime: "残業",
-      lateNightOverTime: "深夜",
-      holidayWorkTime: "休出",
-      annualVacation: "年休",
-      absenteeism: "欠勤",
-      publicHolidayTime: "公休",
-      companyClosureTime: "休業",
-    },
-  ],
+  // attendanceTypes: ["残業", "深夜", "休出", "年休", "欠勤", "公休", "休業"],
+  attendanceTypes: {
+    overTime: "残業",
+    lateNightOverTime: "深夜",
+    holidayWorkTime: "休出",
+    annualVacation: "年休",
+    absenteeism: "欠勤",
+    publicHolidayTime: "公休",
+    companyClosureTime: "休業",
+  },
+
   calendars: {},
   cumulativeTotal: {
     overTime: 0.0,
@@ -91,11 +91,7 @@ const calcCumulativeTotal = () => {
     <!-- 出勤メモここまで -->
 
     <!-- 種別 -->
-    <table
-      class="flex flex-col items-center border-l border-r"
-      v-for="(type, index) in reactiveData.attendanceTypes"
-      v-bind:key="index"
-    >
+    <table class="flex flex-col items-center border-l border-r">
       <thead>
         <tr>
           <th
@@ -111,37 +107,37 @@ const calcCumulativeTotal = () => {
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.overTime }}
+            {{ reactiveData.attendanceTypes.overTime }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.lateNightOverTime }}
+            {{ reactiveData.attendanceTypes.lateNightOverTime }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.holidayWorkTime }}
+            {{ reactiveData.attendanceTypes.holidayWorkTime }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.annualVacation }}
+            {{ reactiveData.attendanceTypes.annualVacation }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.absenteeism }}
+            {{ reactiveData.attendanceTypes.absenteeism }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.publicHolidayTime }}
+            {{ reactiveData.attendanceTypes.publicHolidayTime }}
           </td>
           <td
             class="flex justify-center items-center w-full font-bold h-8 text-sm border-b"
           >
-            {{ type.companyClosureTime }}
+            {{ reactiveData.attendanceTypes.companyClosureTime }}
           </td>
         </tr>
       </tbody>
@@ -149,7 +145,7 @@ const calcCumulativeTotal = () => {
     <!-- 種別ここまで -->
 
     <!-- 出勤カレンダー -->
-    <table class="flex overflow-x-scroll border-t border-b border-r">
+    <table class="flex border-t border-b border-r">
       <div
         v-for="(dayObj, index) in reactiveData.calendars.days"
         v-bind:key="index"
@@ -247,50 +243,57 @@ const calcCumulativeTotal = () => {
         <thead>
           <tr>
             <th
-              class="flex flex-col justify-center h-20 w-24 bg-green-600 font-bold text-sm text-white"
+              class="flex flex-col justify-center h-24 w-24 bg-green-600 font-bold text-sm text-white"
             >
               <span>累計</span>
             </th>
           </tr>
         </thead>
         <tbody class="w-full h-full">
-          <tr class="flex flex-col items-center h-36 w-full">
+          <tr class="flex flex-col items-center w-full">
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{ reactiveData.cumulativeTotal.overTime.toFixed(1) }}&nbsp;時間
             </td>
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{
                 reactiveData.cumulativeTotal.lateNightOverTime.toFixed(1)
               }}&nbsp;時間
             </td>
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{
                 reactiveData.cumulativeTotal.holidayWorkTime.toFixed(1)
               }}&nbsp;時間
             </td>
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{
                 reactiveData.cumulativeTotal.annualVacation.toFixed(1)
               }}&nbsp;日
             </td>
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{ reactiveData.cumulativeTotal.absenteeism.toFixed(1) }}&nbsp;日
             </td>
             <td
-              class="flex justify-center items-center w-full text-base h-6 border-b"
+              class="flex justify-center items-center w-full text-base h-8 border-b"
             >
               {{
                 reactiveData.cumulativeTotal.publicHolidayTime.toFixed(1)
+              }}&nbsp;日
+            </td>
+            <td
+              class="flex justify-center items-center w-full text-base h-8 border-b"
+            >
+              {{
+                reactiveData.cumulativeTotal.companyClosureTime.toFixed(1)
               }}&nbsp;日
             </td>
           </tr>
